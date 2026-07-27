@@ -8,6 +8,8 @@ When looking for a job, it's easy to get overwhelmed by conflicting advice on wh
 - Which programming languages and tools (like Python, SQL, or Power BI) pop up the most?
 - How many years of experience do employers actually ask for?
 - Where are most of these jobs located?
+- Which tools and languages are most frequently requested together ?
+- Are remote roles more common for certain skills
 
 ## Tech stack
 
