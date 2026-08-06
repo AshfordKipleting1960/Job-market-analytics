@@ -36,7 +36,7 @@ When looking for a job, it's easy to get overwhelmed by conflicting advice on wh
 
 ##  Key Findings & Insights
 
-## 💡 𝙺𝚎𝚢 𝙵𝚒𝚗𝚍𝚒𝚗𝚐𝚜
+##  𝙺𝚎𝚢 𝙵𝚒𝚗𝚍𝚒𝚗𝚐𝚜
 
 Out of 52,000 job postings analyzed (including over 10,000 AI roles), a few clear patterns emerged:
 
@@ -110,7 +110,7 @@ make test
 # Or manually: pytest -v
 ```
 
-### 5. ᴇxᴘʟᴏʀᴇ sǫʟ ǫᴜᴇʀɪᴇs & ᴘᴏᴡᴇʀ ʙɪ ʀᴇᴘᴏʀᴛs
+### 6. ᴇxᴘʟᴏʀᴇ sǫʟ ǫᴜᴇʀɪᴇs & ᴘᴏᴡᴇʀ ʙɪ ʀᴇᴘᴏʀᴛs
 *  **ᴠɪᴇᴡ sǫʟ ǫᴜᴇʀɪᴇs:** Check out `.sql` scripts inside [`sql/`](./sql/) for data aggregation logic.
 *  **ʀᴇᴠɪᴇᴡ ᴅᴀᴛᴀ ᴘʀᴇᴘ:** Inspect Jupyter Notebooks in [`notebooks/`](./notebooks/) for exploratory routines.
 *  **ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ʀᴇᴘᴏʀᴛ:** Open the `.pbix` file inside [`reports/`](./reports/) using **Powe
