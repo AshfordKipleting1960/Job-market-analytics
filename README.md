@@ -36,7 +36,7 @@ When looking for a job, it's easy to get overwhelmed by conflicting advice on wh
 
 ##  Key Findings & Insights
 
-##  𝙺𝚎𝚢 𝙵𝚒𝚗𝚍𝚒𝚗𝚐𝚜
+## 𝙺𝚎𝚢 𝙵𝚒𝚗𝚍𝚒𝚗𝚐𝚜
 
 Out of 52,000 job postings analyzed (including over 10,000 AI roles), a few clear patterns emerged:
 
