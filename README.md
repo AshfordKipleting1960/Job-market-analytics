@@ -1,6 +1,6 @@
 # Job Market Analytics Project
 
-A simple data analytics project to track in-demand tech skills, experience levels, and hiring trends for data related jobs  using Python, MySQL, and Power BI.
+A simple data analytics project to track in-demand tech skills, experience levels, and hiring trends for data related jobs using Python, MySQL, and Power BI.
 
 ## What it does
 
@@ -8,8 +8,8 @@ When looking for a job, it's easy to get overwhelmed by conflicting advice on wh
 - Which programming languages and tools (like Python, SQL, or Power BI) pop up the most?
 - How many years of experience do employers actually ask for?
 - Where are most of these jobs located?
-- Which tools and languages are most frequently requested together ?
-- Are remote roles more common for certain skills ?
+- Which tools and languages are most frequently requested together?
+- Are remote roles more common for certain skills?
 
 ## Tech stack
 
@@ -29,12 +29,13 @@ When looking for a job, it's easy to get overwhelmed by conflicting advice on wh
 ## Folder structure
 
 - `data/` – Raw and cleaned CSV files
-- `notebooks/` – Jupyter notebooks for playing around with the data
-- `sql/` – Database queries
-- `reports/` – Power BI files
-- `visuals/` – Saved charts and screenshots
-
-##  Key Findings & Insights
+  - `raw/` – Raw job posting CSV files
+  - `cleaned/` – Output from ETL pipeline
+- `notebooks/` – Jupyter notebooks for exploratory data analysis
+- `sql/` – Database schema and analysis queries
+- `scripts/` – ETL pipeline and data loading scripts
+- `reports/` – Power BI dashboards (.pbix files)
+- `tests/` – Unit tests for data cleaning functions
 
 ## 𝙺𝚎𝚢 𝙵𝚒𝚗𝚍𝚒𝚗𝚐𝚜
 
@@ -46,9 +47,7 @@ Out of 52,000 job postings analyzed (including over 10,000 AI roles), a few clea
 *  **𝙴𝚡𝚙𝚎𝚛𝚒𝚎𝚗𝚌𝚎 𝙻𝚎𝚟𝚎𝚕𝚜:** The market heavily favors mid-to-senior talent. Roughly 89% of listings targeted mid-senior roles (~11k postings).
 *  **𝙷𝚒𝚛𝚒𝚗𝚐 𝙷𝚞𝚋𝚜:** New York led all cities in total job volume, followed by Chicago, London, San Francisco, and Washington, D.C.
 
-
-
-##  Dashboard Overview
+## Dashboard Overview
 
 ### 1. Market Overview & Seniority Distribution
 ![Job Market Overview](images/page1.png)
@@ -61,15 +60,16 @@ Out of 52,000 job postings analyzed (including over 10,000 AI roles), a few clea
 
 ---
 
-##  Tech Stack & Tools
+## Tech Stack & Tools
 
 * **Data Processing & EDA:** Python (Pandas, NumPy, Jupyter Notebooks)
-* **Database & Querying:** MySQL (Aggregations, Grouping, Skill Extraction)
+* **Database & Querying:** MySQL (Aggregations, Grouping, Analysis)
 * **ORM & Connection:** Python `mysql-connector-python`
 * **Visualization & BI:** Power BI (DAX, Interactive Slicers, Custom Layouts)
+* **Testing:** pytest for unit tests
 * **Version Control:** Git & GitHub
 
-##  ʜᴏᴡ ᴛᴏ ᴇxᴘʟᴏʀᴇ & ʀᴇᴘʀᴏᴅᴜᴄᴇ
+## ʜᴏᴡ ᴛᴏ ᴇxᴘʟᴏʀᴇ & ʀᴇᴘʀᴏᴅᴜᴄᴇ
 
 ### 1. ᴄʟᴏɴᴇ ᴛʜᴇ ʀᴇᴘᴏsɪᴛᴏʀʏ
 ```bash
@@ -88,15 +88,32 @@ make install
 pip install -r requirements.txt
 ```
 
-### 3. ʀᴜɴ ᴛʜᴇ ᴇᴛʟ ᴘɪᴘᴇʟɪɴᴇ
-Extracts raw CSVs from `data/raw/`, cleans fields, drops duplicates, and exports structured CSVs to `data/cleaned/`:
+### 3. ᴀᴅᴅ ʏᴏᴜʀ ᴊᴏʙ ᴅᴀᴛᴀ
+Place your raw job posting CSV file in the `data/raw/` directory:
+```bash
+# Your CSV should have these columns (or similar):
+# - job_title
+# - company_name
+# - job_location
+# - work_type (Remote, Hybrid, Onsite)
+# - job_level (Entry, Associate, Mid-Senior, Senior, Executive)
+# - years_exp
+# - skills
+# - salary
+# - posted_date
+
+cp your_job_postings.csv data/raw/job_postings.csv
+```
+
+### 4. ʀᴜɴ ᴛʜᴇ ᴇᴛʟ ᴘɪᴘᴇʟɪɴᴇ
+Extracts raw CSV from `data/raw/`, cleans fields, drops duplicates, and exports cleaned data to `data/cleaned/`:
 
 ```bash
 make run-etl
 # Or manually: python scripts/etl.py
 ```
 
-### 4. sᴇᴛᴜᴘ ᴍʏsǫʟ ᴅᴀᴛᴀʙᴀsᴇ
+### 5. sᴇᴛᴜᴘ ᴍʏsǫʟ ᴅᴀᴛᴀʙᴀsᴇ
 Before loading data, ensure MySQL is installed and running:
 
 ```bash
@@ -117,14 +134,14 @@ mysql> EXIT;
 # Update DB_CONFIG in scripts/load_db.py with your password
 ```
 
-### 5. ʟᴏᴀᴅ ᴅᴀᴛᴀ ɪɴᴛᴏ ᴍʏsǫʟ ᴅᴀᴛᴀʙᴀsᴇ
+### 6. ʟᴏᴀᴅ ᴅᴀᴛᴀ ɪɴᴛᴏ ᴍʏsǫʟ ᴅᴀᴛᴀʙᴀsᴇ
 Executes `sql/schema.sql` and bulk loads the cleaned dataset into MySQL:
 
 ```bash
 python scripts/load_db.py
 ```
 
-### 6. ʀᴜɴ ᴜɴɪᴛ ᴛᴇsᴛs
+### 7. ʀᴜɴ ᴜɴɪᴛ ᴛᴇsᴛs
 Verify data transformation functions using `pytest`:
 
 ```bash
@@ -132,7 +149,57 @@ make test
 # Or manually: pytest -v
 ```
 
-### 7. ᴇxᴘʟᴏʀᴇ sǫʟ ǫᴜᴇʀɪᴇs & ᴘᴏᴡᴇʀ ʙɪ ʀᴇᴘᴏʀᴛs
-*  **ᴠɪᴇᴡ sǫʟ ǫᴜᴇʀɪᴇs:** Check out `.sql` scripts inside [`sql/`](./sql/) for data aggregation logic.
-*  **ʀᴇᴠɪᴇᴡ ᴅᴀᴛᴀ ᴘʀᴇᴘ:** Inspect Jupyter Notebooks in [`notebooks/`](./notebooks/) for exploratory routines.
-*  **ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ʀᴇᴘᴏʀᴛ:** Open the `.pbix` file inside [`reports/`](./reports/) using **Power BI Desktop**.
+### 8. ᴇxᴘʟᴏʀᴇ sǫʟ ǫᴜᴇʀɪᴇs & ᴘᴏᴡᴇʀ ʙɪ ʀᴇᴘᴏʀᴛs
+*  **ᴠɪᴇᴡ sǫʟ ǫᴜᴇʀɪᴇs:** Check out `.sql` scripts inside [`sql/`](./sql/) for data aggregation logic. These queries answer key business questions like top locations, salary by experience level, and work type distribution.
+*  **ʀᴜɴ ǫᴜᴇʀɪᴇs:** Connect to your MySQL database and run queries from `sql/analysis_queries.sql`
+*  **ʀᴇᴠɪᴇᴡ ᴅᴀᴛᴀ ᴘʀᴇᴘ:** Inspect Jupyter Notebooks in [`notebooks/`](./notebooks/) for exploratory analysis routines.
+*  **ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ʀᴇᴘᴏʀᴛ:** Open the `.pbix` file inside [`reports/`](./reports/) using **Power BI Desktop** to explore interactive dashboards.
+
+---
+
+## Database Schema
+
+The project uses a single unified table structure for simplicity and clarity:
+
+**Table: `job_postings`**
+| Column | Type | Description |
+|--------|------|-------------|
+| `job_id` | INT (PK) | Unique job posting identifier |
+| `title` | VARCHAR(255) | Job title |
+| `company` | VARCHAR(255) | Company name |
+| `location` | VARCHAR(255) | Job location (city, region) |
+| `work_type` | VARCHAR(50) | Remote, Hybrid, or Onsite |
+| `experience_level` | VARCHAR(50) | Entry, Associate, Mid-Senior, Senior, Executive |
+| `years_experience` | DECIMAL(5,2) | Years of experience required |
+| `skills` | LONGTEXT | Required skills (comma-separated) |
+| `salary` | DECIMAL(10,2) | Annual salary (if available) |
+| `posted_date` | DATE | Job posting date |
+| `created_at` | TIMESTAMP | Record creation timestamp |
+
+---
+
+## Example SQL Queries
+
+Run these queries against your database to uncover insights:
+
+```sql
+-- Top 10 job titles by volume
+SELECT title, COUNT(*) AS job_count 
+FROM job_postings 
+GROUP BY title 
+ORDER BY job_count DESC LIMIT 10;
+
+-- Average salary by work type
+SELECT work_type, ROUND(AVG(salary), 2) AS avg_salary 
+FROM job_postings 
+WHERE salary IS NOT NULL
+GROUP BY work_type;
+
+-- Experience level distribution
+SELECT experience_level, COUNT(*) AS job_count 
+FROM job_postings 
+GROUP BY experience_level 
+ORDER BY job_count DESC;
+```
+
+See [`sql/analysis_queries.sql`](./sql/analysis_queries.sql) for more examples.

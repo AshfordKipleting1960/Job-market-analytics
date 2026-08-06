@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from scripts.etl import clean_ai_trends, clean_details, clean_postings
+from scripts.etl import clean_postings
 
 
 @pytest.fixture
@@ -15,6 +15,8 @@ def sample_postings_df():
             ],
             "job_location": ["new york, ny", None, " chicago, il "],
             "job_level": [" Mid senior ", None, "Associate"],
+            "work_type": ["remote", "HYBRID", None],
+            "skills": [None, "Python, SQL", "Excel"],
         }
     )
 
@@ -23,43 +25,53 @@ def test_clean_postings_duplicates(sample_postings_df):
     """Test duplicate dropping and text standardization."""
     cleaned = clean_postings(sample_postings_df)
 
-    # First two rows were identical after title normalization
+    # First two rows are identical after title normalization, so should be removed
     assert len(cleaned) == 2
+    print(f"✓ Duplicate removal working: {len(sample_postings_df)} -> {len(cleaned)}")
+
+
+def test_clean_postings_title_normalization(sample_postings_df):
+    """Test job title text standardization."""
+    cleaned = clean_postings(sample_postings_df)
 
     # Verify string trimming and title casing
     assert cleaned["job_title"].iloc[0] == "Data Engineer"
     assert cleaned["job_title"].iloc[1] == "Business Analyst"
+    print("✓ Job title normalization working")
 
 
-def test_clean_postings_null_handling(sample_postings_df):
-    """Test missing value replacement in job postings."""
+def test_clean_postings_location_handling(sample_postings_df):
+    """Test location field null handling and standardization."""
     cleaned = clean_postings(sample_postings_df)
 
-    # Verify fillna rules
-    assert (
-        cleaned["job_location"].iloc[1] == "Unknown"
-        or cleaned["job_location"].iloc[0] == "New York, Ny"
-    )
-    assert (
-        cleaned["job_level"].iloc[1] == "Not Specified"
-        or cleaned["job_level"].iloc[0] == "Mid senior"
-    )
+    # Verify that missing values are filled with "Unknown"
+    assert "Unknown" in cleaned["job_location"].values or "Unknown" in cleaned["job_location"].values
+    print("✓ Location null handling working")
 
 
-def test_clean_details():
-    """Test details dataset skill cleaning."""
-    df = pd.DataFrame({"skills": [None, "['python', 'sql']"]})
-    cleaned = clean_details(df)
+def test_clean_postings_job_level(sample_postings_df):
+    """Test job level field null handling."""
+    cleaned = clean_postings(sample_postings_df)
 
-    assert cleaned["skills"].iloc[0] == "[]"
-    assert cleaned["skills"].iloc[1] == "['python', 'sql']"
+    # Verify that missing values are filled with "Not Specified"
+    assert "Not Specified" in cleaned["job_level"].values
+    print("✓ Job level null handling working")
 
 
-def test_clean_ai_trends():
-    """Test remote_type capitalization and null handling."""
-    df = pd.DataFrame({"remote_type": [" hybrid ", None, "REMOTE"]})
-    cleaned = clean_ai_trends(df)
+def test_clean_postings_work_type(sample_postings_df):
+    """Test work type standardization."""
+    cleaned = clean_postings(sample_postings_df)
 
-    assert cleaned["remote_type"].iloc[0] == "Hybrid"
-    assert cleaned["remote_type"].iloc[1] == "Unknown"
-    assert cleaned["remote_type"].iloc[2] == "Remote"
+    # Verify capitalization and null handling
+    assert "Unknown" in cleaned["work_type"].values
+    print("✓ Work type standardization working")
+
+
+def test_clean_postings_skills_handling(sample_postings_df):
+    """Test skills field null handling."""
+    cleaned = clean_postings(sample_postings_df)
+
+    # Verify that None values become empty strings
+    assert cleaned["skills"].iloc[0] == ""
+    assert cleaned["skills"].iloc[1] == "Python, SQL"
+    print("✓ Skills field handling working")

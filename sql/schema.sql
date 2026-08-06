@@ -9,10 +9,11 @@ CREATE TABLE job_postings (
     work_type VARCHAR(50),          -- Remote, Hybrid, Onsite
     experience_level VARCHAR(50),   -- Mid-Senior, Associate, Entry, Executive
     years_experience DECIMAL(5,2),
-    skills LONGTEXT,                -- Machine Learning, SQL, Python, etc.
+    skills LONGTEXT,                -- Python, SQL, Machine Learning (comma-separated or JSON)
     salary DECIMAL(10,2),
     posted_date DATE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    KEY idx_work_type (work_type),  -- Add indexing for common queries
-    KEY idx_location (location)
+    KEY idx_work_type (work_type),
+    KEY idx_location (location),
+    KEY idx_experience_level (experience_level)
 );

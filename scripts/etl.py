@@ -4,72 +4,80 @@ import pandas as pd
 
 
 def clean_postings(df: pd.DataFrame) -> pd.DataFrame:
-    """Cleans job postings dataset."""
+    """Cleans job postings dataset: removes duplicates and standardizes text fields."""
     df = df.drop_duplicates()
+    
+    # Standardize location field
     if "job_location" in df.columns:
         df["job_location"] = (
             df["job_location"].fillna("Unknown").str.strip().str.title()
         )
+    
+    # Standardize experience level field
     if "job_level" in df.columns:
         df["job_level"] = (
             df["job_level"].fillna("Not Specified").str.strip()
         )
+    
+    # Standardize job title field
     if "job_title" in df.columns:
         df["job_title"] = df["job_title"].str.strip().str.title()
-    return df
-
-
-def clean_details(df: pd.DataFrame) -> pd.DataFrame:
-    """Cleans jobs detail dataset."""
-    df = df.drop_duplicates()
-    if "skills" in df.columns:
-        df["skills"] = df["skills"].fillna("[]")
-    return df
-
-
-def clean_ai_trends(df: pd.DataFrame) -> pd.DataFrame:
-    """Cleans AI job market trends dataset."""
-    df = df.drop_duplicates()
-    if "remote_type" in df.columns:
-        df["remote_type"] = (
-            df["remote_type"].fillna("Unknown").str.strip().str.capitalize()
+    
+    # Handle work type field
+    if "work_type" in df.columns:
+        df["work_type"] = (
+            df["work_type"].fillna("Unknown").str.strip().str.capitalize()
         )
+    
+    # Handle skills field (ensure empty values are standardized)
+    if "skills" in df.columns:
+        df["skills"] = df["skills"].fillna("")
+    
     return df
 
 
 def run_pipeline(data_dir: str, output_dir: str):
-    """Loads raw CSVs, runs cleaning functions, and exports to cleaned directory."""
+    """
+    Loads raw CSV, cleans it, and exports to cleaned directory.
+    
+    Expected input file: job_postings.csv (raw data from job listings)
+    Output file: cleaned_job_postings.csv (cleaned and ready for database)
+    """
 
     # Define paths
     postings_path = os.path.join(data_dir, "job_postings.csv")
-    details_path = os.path.join(data_dir, "final_clean_jobs_dataset.csv")
-    ai_path = os.path.join(data_dir, "AI_Job_Market_Trends_2026.csv")
 
-    print(f" Reading raw datasets from: {data_dir}")
-    df_postings = pd.read_csv(postings_path)
-    df_clean = pd.read_csv(details_path)
-    df_ai = pd.read_csv(ai_path)
+    # Check if input file exists
+    if not os.path.exists(postings_path):
+        print(f"❌ Error: {postings_path} not found!")
+        print(f"   Please add your job_postings.csv file to {data_dir}/")
+        return
 
-    print(" Executing cleaning pipeline...")
+    print(f"📂 Reading raw dataset from: {data_dir}")
+    try:
+        df_postings = pd.read_csv(postings_path)
+        print(f"   Loaded {len(df_postings):,} records")
+    except Exception as e:
+        print(f"❌ Error reading CSV: {e}")
+        return
+
+    print("🧹 Executing cleaning pipeline...")
     df_postings_cleaned = clean_postings(df_postings)
-    df_clean_cleaned = clean_details(df_clean)
-    df_ai_cleaned = clean_ai_trends(df_ai)
+    print(f"   After deduplication: {len(df_postings_cleaned):,} records")
 
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
-    print(f" Exporting cleaned files to: {output_dir}")
-    df_postings_cleaned.to_csv(
-        os.path.join(output_dir, "cleaned_job_postings.csv"), index=False
-    )
-    df_clean_cleaned.to_csv(
-        os.path.join(output_dir, "cleaned_jobs_detail.csv"), index=False
-    )
-    df_ai_cleaned.to_csv(
-        os.path.join(output_dir, "cleaned_ai_job_trends.csv"), index=False
-    )
+    print(f"💾 Exporting cleaned files to: {output_dir}")
+    output_path = os.path.join(output_dir, "cleaned_job_postings.csv")
+    df_postings_cleaned.to_csv(output_path, index=False)
+    print(f"   ✅ Saved to {output_path}")
 
     print(" ETL PIPELINE COMPLETED SUCCESSFULLY!")
+    print(f"\n📊 Summary:")
+    print(f"   - Input records: {len(df_postings):,}")
+    print(f"   - Output records: {len(df_postings_cleaned):,}")
+    print(f"   - Duplicates removed: {len(df_postings) - len(df_postings_cleaned):,}")
 
 
 if __name__ == "__main__":
