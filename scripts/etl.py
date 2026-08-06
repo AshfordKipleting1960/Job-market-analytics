@@ -49,16 +49,16 @@ def run_pipeline(data_dir: str, output_dir: str):
 
     # Check if input file exists
     if not os.path.exists(postings_path):
-        print(f"❌ Error: {postings_path} not found!")
+        print(f" Error: {postings_path} not found!")
         print(f"   Please add your job_postings.csv file to {data_dir}/")
         return
 
-    print(f"📂 Reading raw dataset from: {data_dir}")
+    print(f" Reading raw dataset from: {data_dir}")
     try:
         df_postings = pd.read_csv(postings_path)
         print(f"   Loaded {len(df_postings):,} records")
     except Exception as e:
-        print(f"❌ Error reading CSV: {e}")
+        print(f" Error reading CSV: {e}")
         return
 
     print("🧹 Executing cleaning pipeline...")
@@ -68,13 +68,13 @@ def run_pipeline(data_dir: str, output_dir: str):
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
-    print(f"💾 Exporting cleaned files to: {output_dir}")
+    print(f" Exporting cleaned files to: {output_dir}")
     output_path = os.path.join(output_dir, "cleaned_job_postings.csv")
     df_postings_cleaned.to_csv(output_path, index=False)
-    print(f"   ✅ Saved to {output_path}")
+    print(f"    Saved to {output_path}")
 
     print(" ETL PIPELINE COMPLETED SUCCESSFULLY!")
-    print(f"\n📊 Summary:")
+    print(f"\n Summary:")
     print(f"   - Input records: {len(df_postings):,}")
     print(f"   - Output records: {len(df_postings_cleaned):,}")
     print(f"   - Duplicates removed: {len(df_postings) - len(df_postings_cleaned):,}")
