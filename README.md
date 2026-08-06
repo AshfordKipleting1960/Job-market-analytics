@@ -94,8 +94,15 @@ Extracts raw CSVs from `data/raw/`, cleans fields, drops duplicates, and exports
 make run-etl
 # Or manually: python scripts/etl.py
 ```
+### 4. ʟᴏᴀᴅ ᴅᴀᴛᴀ ɪɴᴛᴏ ᴛʜᴇ ᴅᴀᴛᴀʙᴀsᴇ
+Executes `sql/schema.sql` and bulk loads the cleaned dataset into a local SQLite database (`data/job_market.db`):
 
-### 4. ʀᴜɴ ᴜɴɪᴛ ᴛᴇsᴛs
+```bash
+make load-db
+# Or manually: python scripts/load_db.py
+```
+
+### 5. ʀᴜɴ ᴜɴɪᴛ ᴛᴇsᴛs
 Verify data transformation functions using `pytest`:
 
 ```bash
