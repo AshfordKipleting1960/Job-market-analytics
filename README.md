@@ -68,13 +68,16 @@ Out of 52,000 job postings analyzed (including over 10,000 AI roles), a few clea
 * **Visualization & BI:** Power BI (DAX, Interactive Slicers, Custom Layouts)
 * **Version Control:** Git & GitHub
 
-**ʜᴏᴡ ᴛᴏ ᴇxᴘʟᴏʀᴇ & ʀᴇᴘʀᴏᴅᴜᴄᴇ**
-**1. ᴄʟᴏɴᴇ ᴛʜᴇ ʀᴇᴘᴏsɪᴛᴏʀʏ**
-Bash
+##  ʜᴏᴡ ᴛᴏ ᴇxᴘʟᴏʀᴇ & ʀᴇᴘʀᴏᴅᴜᴄᴇ
+
+### 1. ᴄʟᴏɴᴇ ᴛʜᴇ ʀᴇᴘᴏsɪᴛᴏʀʏ
+```bash
 git clone [https://github.com/AshfordKipleting1960/Job-market-analytics.git](https://github.com/AshfordKipleting1960/Job-market-analytics.git)
 cd Job-market-analytics
-**2. sᴇᴛ ᴜᴘ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ & ᴅᴇᴘᴇɴᴅᴇɴᴄɪᴇs**
-Bash
+```
+
+### 2. sᴇᴛ ᴜᴘ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ & ᴅᴇᴘᴇɴᴅᴇɴᴄɪᴇs
+```bash
 # Using Makefile
 make venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
@@ -82,21 +85,25 @@ make install
 
 # Or manually using pip:
 pip install -r requirements.txt
-**3. ʀᴜɴ ᴛʜᴇ ᴇᴛʟ ᴘɪᴘᴇʟɪɴᴇ**
-Extracts raw CSVs from data/raw/, cleans fields, drops duplicates, and exports structured CSVs to data/cleaned/:
+```
 
-Bash
+### 3. ʀᴜɴ ᴛʜᴇ ᴇᴛʟ ᴘɪᴘᴇʟɪɴᴇ
+Extracts raw CSVs from `data/raw/`, cleans fields, drops duplicates, and exports structured CSVs to `data/cleaned/`:
+
+```bash
 make run-etl
 # Or manually: python scripts/etl.py
-**4. ʀᴜɴ ᴜɴɪᴛ ᴛᴇsᴛs**
-Verify data transformation functions using pytest:
+```
 
-Bash
+### 4. ʀᴜɴ ᴜɴɪᴛ ᴛᴇsᴛs
+Verify data transformation functions using `pytest`:
+
+```bash
 make test
 # Or manually: pytest -v
-**5. ᴇxᴘʟᴏʀᴇ sǫʟ ǫᴜᴇʀɪᴇs & ᴘᴏᴡᴇʀ ʙɪ ʀᴇᴘᴏʀᴛs**
- ᴠɪᴇᴡ sǫʟ ǫᴜᴇʀɪᴇs: Check out .sql scripts inside sql/ for data aggregation logic.
+```
 
- ʀᴇᴠɪᴇᴡ ᴅᴀᴛᴀ ᴘʀᴇᴘ: Inspect Jupyter Notebooks in notebooks/ for exploratory routines.
-
-ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ʀᴇᴘᴏʀᴛ: Open the .pbix file inside reports/ using Power BI Desktop to test dynamic filters.
+### 5. ᴇxᴘʟᴏʀᴇ sǫʟ ǫᴜᴇʀɪᴇs & ᴘᴏᴡᴇʀ ʙɪ ʀᴇᴘᴏʀᴛs
+*  **ᴠɪᴇᴡ sǫʟ ǫᴜᴇʀɪᴇs:** Check out `.sql` scripts inside [`sql/`](./sql/) for data aggregation logic.
+*  **ʀᴇᴠɪᴇᴡ ᴅᴀᴛᴀ ᴘʀᴇᴘ:** Inspect Jupyter Notebooks in [`notebooks/`](./notebooks/) for exploratory routines.
+*  **ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ʀᴇᴘᴏʀᴛ:** Open the `.pbix` file inside [`reports/`](./reports/) using **Powe
