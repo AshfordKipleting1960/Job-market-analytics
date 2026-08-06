@@ -36,21 +36,17 @@ When looking for a job, it's easy to get overwhelmed by conflicting advice on wh
 
 ##  Key Findings & Insights
 
-Based on an analysis of over **52,000 job openings** (including **10,000+ AI-focused roles**):
+## 💡 𝙺𝚎𝚢 𝙵𝚒𝚗𝚍𝚒𝚗𝚐𝚜
 
-* **Top Job Openings by Role:** Data Engineers lead the market (**445 postings**), followed closely by Business Analysts (**407**), Data Scientists (**360**), and Data Analysts (**280**).
-* **Core Skill Demand:** Core technical skills show high, balanced demand across the board:
-  * **Machine Learning & Cloud (AWS):** Top requested skills (~5.3K postings each).
-  * **SQL & Deep Learning:** Tied for second (~5.2K postings each).
-  * **Python:** Highly requested across data science and engineering roles (~5.1K postings).
-* **Work Arrangement Breakdown:** Work location models are evenly distributed across the tech industry:
-  * **Remote:** 33.96% (3.51K postings)
-  * **Hybrid:** 33.06% (3.42K postings)
-  * **Onsite:** 32.98% (3.41K postings)
-* **Seniority & Experience Distribution:** **89.37%** of listings target **Mid-Senior** professionals (~11K postings), while **10.63%** target **Associate** tier roles (~1K postings).
-* **Top Hiring Hubs:** **New York, NY** is the leading location by job volume, followed by **Chicago, IL**, **London, UK**, **San Francisco, CA**, and **Washington, DC**.
+Out of 52,000 job postings analyzed (including over 10,000 AI roles), a few clear patterns emerged:
 
----
+*  **𝚁𝚘𝚕𝚎 𝙳𝚎𝚖𝚊𝚗𝚍:** Data Engineers took the top spot with 445 open listings, followed by Business Analysts (407), Data Scientists (360), and Data Analysts (280).
+*  **𝚃𝚘𝚙 𝚂𝚔𝚒𝚕𝚕𝚜:** Machine Learning and Cloud/AWS were the most requested technical skills at ~5.3k listings each, with SQL and Deep Learning right behind at ~5.2k. Python stayed consistently high across almost all roles at ~5.1k postings.
+*  **𝚆𝚘𝚛𝚔 𝙻𝚘𝚌𝚊𝚝𝚒𝚘𝚗:** Listings were split almost evenly three ways—Remote (34%), Hybrid (33%), and Onsite (33%).
+*  **𝙴𝚡𝚙𝚎𝚛𝚒𝚎𝚗𝚌𝚎 𝙻𝚎𝚟𝚎𝚕𝚜:** The market heavily favors mid-to-senior talent. Roughly 89% of listings targeted mid-senior roles (~11k postings), while associate/entry-level roles made up just 11% (~1k postings).
+*  **𝙷𝚒𝚛𝚒𝚗𝚐 𝙷𝚞𝚋𝚜:** New York led all cities in total job volume, followed by Chicago, London, San Francisco, and Washington, D.C.
+
+
 
 ##  Dashboard Overview
 
