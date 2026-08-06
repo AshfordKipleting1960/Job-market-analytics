@@ -68,8 +68,35 @@ Out of 52,000 job postings analyzed (including over 10,000 AI roles), a few clea
 * **Visualization & BI:** Power BI (DAX, Interactive Slicers, Custom Layouts)
 * **Version Control:** Git & GitHub
 
-## ʜᴏᴡ ᴛᴏ ᴇxᴘʟᴏʀᴇ ᴛʜɪs ᴘʀᴏᴊᴇᴄᴛ
+**ʜᴏᴡ ᴛᴏ ᴇxᴘʟᴏʀᴇ & ʀᴇᴘʀᴏᴅᴜᴄᴇ**
+**1. ᴄʟᴏɴᴇ ᴛʜᴇ ʀᴇᴘᴏsɪᴛᴏʀʏ**
+Bash
+git clone [https://github.com/AshfordKipleting1960/Job-market-analytics.git](https://github.com/AshfordKipleting1960/Job-market-analytics.git)
+cd Job-market-analytics
+**2. sᴇᴛ ᴜᴘ ᴇɴᴠɪʀᴏɴᴍᴇɴᴛ & ᴅᴇᴘᴇɴᴅᴇɴᴄɪᴇs**
+Bash
+# Using Makefile
+make venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+make install
 
-1.  **ᴠɪᴇᴡ ᴛʜᴇ qᴜᴇʀɪᴇs:** Check out the `.sql` scripts inside the [`sql/`](./sql/) directory to see data aggregation logic.
-2.  **ʀᴇᴠɪᴇᴡ ᴅᴀᴛᴀ ᴘʀᴇᴘ:** Open Jupyter Notebooks in [`notebooks/`](./notebooks/) to inspect data cleaning routines.
-3.  **ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ʀᴇᴘᴏʀᴛ:** Open the `.pbix` file inside [`reports/`](./reports/) using **Power BI Desktop** to interact with dynamic filters.
+# Or manually using pip:
+pip install -r requirements.txt
+**3. ʀᴜɴ ᴛʜᴇ ᴇᴛʟ ᴘɪᴘᴇʟɪɴᴇ**
+Extracts raw CSVs from data/raw/, cleans fields, drops duplicates, and exports structured CSVs to data/cleaned/:
+
+Bash
+make run-etl
+# Or manually: python scripts/etl.py
+**4. ʀᴜɴ ᴜɴɪᴛ ᴛᴇsᴛs**
+Verify data transformation functions using pytest:
+
+Bash
+make test
+# Or manually: pytest -v
+**5. ᴇxᴘʟᴏʀᴇ sǫʟ ǫᴜᴇʀɪᴇs & ᴘᴏᴡᴇʀ ʙɪ ʀᴇᴘᴏʀᴛs**
+ ᴠɪᴇᴡ sǫʟ ǫᴜᴇʀɪᴇs: Check out .sql scripts inside sql/ for data aggregation logic.
+
+ ʀᴇᴠɪᴇᴡ ᴅᴀᴛᴀ ᴘʀᴇᴘ: Inspect Jupyter Notebooks in notebooks/ for exploratory routines.
+
+ɪɴᴛᴇʀᴀᴄᴛɪᴠᴇ ʀᴇᴘᴏʀᴛ: Open the .pbix file inside reports/ using Power BI Desktop to test dynamic filters.
